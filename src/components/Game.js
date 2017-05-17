@@ -19,8 +19,16 @@ class Game extends Component {
   // used matchedCardIndexes to check if count === 8 || this.state.cards.length ->then gameOver
   state = { cards: this.cards, flippedCardIndexes: [], matchedCardIndexes: [] };
 
-  // What lifecycle method could we use each time the components state is updated to check for gameOver
-// ANSWER: didUpdate
+  // componentDidUpdate() {
+  //   let { flippedCardIndexes, matchedCardIndexes } = this.state
+  //   if (flippedCardIndexes === matchedCardIndexes)
+  //     this.props.gameOver = true;
+  //     this.setState = { cards: this.cards, flippedCardIndexes: [], matchedCardIndexes: [] };
+  // }
+
+  // checkMatch = () => {
+  //   if ()
+  // }
 
   // figure out how to end the game once all cards are matched this probably requires more state or a lifecycle method that loops card state
   // figure out how to start a new game
@@ -35,14 +43,20 @@ class Game extends Component {
 
 
 // on card click-- needs to be passed as props to card.js
+// updateCard (1, true) ---flip a card
+// updateCard (1, true, true) - flip and match a card
+// updateCard (1 , false, true )- match a card and not flip it -- probably don't need
   updateCard = (cardIndex, flipped = false, matched = false) => {
+    let flippedCardIndexes = this.state.flippedCardIndexes;
     let cards = this.state.cards.map( (card, loopIndex) => {
-      if(cardIndex === loopIndex)
-        return { ...card, flipped, matched };
-      else
+      if(cardIndex === loopIndex) {
+        flippedCardIndexes.push(cardIndex);
+        this.setState({ flippedCardIndexes: [...this.state.flippedCardIndexes, flippedCardIndexes]})
+        return { ...card, flipped: !flipped, matched };
+    }  else
         return card;
     })
-    this.setState({ cards });
+    this.setState({ cards, flippedCardIndexes });
   }
 
   render(){

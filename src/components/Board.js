@@ -4,7 +4,7 @@ import Card from './Card';
 const Board = ({ cards, updateCard }) => {
   let cardOutput = cards.map( (card, index) => {
     return(
-      <Card {...card} index={index} updateCard={updateCard} />
+      <Card {...card} index={index} updateCard={updateCard}/>
     );
   });
 
