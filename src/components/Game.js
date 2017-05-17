@@ -51,7 +51,7 @@ class Game extends Component {
     let cards = this.state.cards.map( (card, loopIndex) => {
       if(cardIndex === loopIndex) {
         flippedCardIndexes.push(cardIndex);
-        this.setState({ flippedCardIndexes: [...this.state.flippedCardIndexes, flippedCardIndexes]})
+        this.setState({ flippedCardIndexes: [...flippedCardIndexes]})
         return { ...card, flipped: !flipped, matched };
     }  else
         return card;
